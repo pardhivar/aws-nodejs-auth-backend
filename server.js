@@ -25,6 +25,10 @@ const authLimiter = rateLimit({
     message: { error: "Too many requests. Try again later." },
 });
 
+app.get("/", (_req, res) => {
+    res.send("Welcome to my home page");
+});
+
 app.get("/health", (_req, res) => {
     const connected = mongoose.connection.readyState === 1;
 
