@@ -62,9 +62,9 @@ async function startServer() {
     console.log("Database connected");
 
     // Bind to loopback: Nginx will proxy public requests to this port.
-    const server = app.listen(port, "127.0.0.1", () => {
-        console.log(`Server listening at http://127.0.0.1:${port}`);
-    });
+    const server = app.listen(port, "0.0.0.0", () => {
+    console.log(`Server listening on port ${port}`);
+});
 
     let shuttingDown = false;
 
