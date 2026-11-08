@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body class="auth-page">
+    <div class="auth-shell">
+      <div class="brand-badge">S3 Image Dashboard</div>
+      <h1>Welcome back</h1>
+      <p class="subtitle">Sign in to upload images to your S3 bucket.</p>
+
+      <form action="/login" method="POST" class="auth-form">
+        <label>
+          Email
+          <input type="email" name="email" placeholder="you@example.com" required />
+        </label>
+
+        <label>
+          Password
+          <input type="password" name="password" placeholder="••••••••" required />
+        </label>
+
+        <% if (error) { %>
+          <p class="error-message"><%= error %></p>
+        <% } %>
+
+        <div class="auth-actions">
+          <button type="submit">Login</button>
+          <a href="/register" class="secondary-button">Create account</a>
+        </div>
+      </form>
+
+      <p class="auth-switch">
+        New here? <a href="/register">Create an account</a>
+      </p>
+    </div>
+  </body>
+</html>

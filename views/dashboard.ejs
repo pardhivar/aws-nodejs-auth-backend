@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body class="dashboard-page">
+    <header class="topbar">
+      <div class="brand-badge">S3 Image Dashboard</div>
+      <nav class="topbar-actions">
+        <span class="user-email"><%= user.email %></span>
+        <a href="/logout" class="logout-link">Logout</a>
+      </nav>
+    </header>
+
+    <main class="dashboard-shell">
+      <section class="upload-card">
+        <div class="card-header">
+          <div>
+            <p class="eyebrow">Dashboard</p>
+            <h2>Upload an image</h2>
+          </div>
+        </div>
+
+        <% if (uploadError) { %>
+          <div class="error-message"><%= uploadError %></div>
+        <% } %>
+
+        <form action="/dashboard/upload" method="POST" enctype="multipart/form-data" class="upload-form">
+          <label class="file-picker" for="imageInput">
+            <input id="imageInput" type="file" name="image" accept="image/*" required />
+            <span>Select image</span>
+          </label>
+
+          <div class="preview-panel">
+            <% if (uploadedImageUrl) { %>
+              <img src="<%= uploadedImageUrl %>" alt="Uploaded preview" class="preview-image" />
+              <p class="uploaded-label">Uploaded: <strong><%= uploadedFileName %></strong></p>
+            <% } else { %>
+              <img
+                id="previewImage"
+                class="preview-image placeholder"
+                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='220' viewBox='0 0 320 220'%3E%3Crect width='320' height='220' fill='%23dfe8ff'/%3E%3Cpath d='M50 150 L110 90 L145 122 L210 60 L270 150 Z' fill='%2398a9ff'/%3E%3Ccircle cx='95' cy='80' r='18' fill='%2398a9ff'/%3E%3C/svg%3E"
+                alt="Preview placeholder"
+              />
+              <p class="upload-hint">Choose a file to preview it before upload.</p>
+            <% } %>
+          </div>
+
+          <button type="submit" class="primary-button">Upload to S3</button>
+        </form>
+      </section>
+    </main>
+
+    <script src="/dashboard.js" defer></script>
+  </body>
+</html>
